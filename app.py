@@ -2,7 +2,6 @@
 import os
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from nocache import nocache
 
 # set up basedir
 basedir = os.path.abspath(os.path.dirname(__file__))
