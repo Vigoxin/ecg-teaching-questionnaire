@@ -1,6 +1,6 @@
 # Imports
 import os
-import shelve
+# import shelve
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
@@ -15,6 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:/
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+db.create_all()
 
 # Data
 from confucius_quotes import quotes
@@ -66,7 +67,6 @@ def index():
 
 @app.route('/response', methods=['GET', 'POST'])
 def response():
-	args_dict = {}
 	args = dict(request.args)
 	for key in args:
 		args[key] = args[key][0]
@@ -78,10 +78,10 @@ def response():
 	# 	data = shelf['data']
 	# 	data.append(values)
 	# 	shelf['data'] = data
-	with open('text_data.txt', 'a') as file:
-		to_add = values
-		to_add = ','.join([str(el) for el in to_add]) + '\n'
-		file.write(to_add)
+	# with open('text_data.txt', 'a') as file:
+	# 	to_add = values
+	# 	to_add = ','.join([str(el) for el in to_add]) + '\n'
+	# 	file.write(to_add)
 	return render_template('thankyou.html', pd=pd, args=args)
 
 
