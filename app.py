@@ -3,7 +3,6 @@ import os
 import shelve
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 
 # set up basedir
 basedir = os.path.abspath(os.path.dirname(__file__))
