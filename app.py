@@ -1,7 +1,9 @@
 # Imports
 import os
+import shelve
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 # set up basedir
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -71,6 +73,10 @@ def response():
 	response_to_add = Response(*values)
 	db.session.add(response_to_add)
 	db.session.commit()
+	with shelve.open('shelf') as shelf:
+		data = shelf['data']
+		data.append(values)
+		shelf['data'] = data
 	return render_template('thankyou.html', pd=pd, args=args)
 
 
