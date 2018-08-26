@@ -57,6 +57,10 @@ class Response(db.Model):
 		return 'This is response {}'.format(self.id)
 
 
+# Setting up shelve
+with shelve.open('shelf') as shelf:
+	shelf['data'] = []
+
 # Routes
 @app.route('/')
 def index():
