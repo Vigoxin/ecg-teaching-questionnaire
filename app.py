@@ -15,7 +15,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:/
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-db.create_all()
 
 # Data
 from confucius_quotes import quotes
@@ -58,7 +57,7 @@ class Response(db.Model):
 		return 'This is response {}'.format(self.id)
 
 
-
+db.create_all()
 
 # Routes
 @app.route('/')
