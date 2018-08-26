@@ -74,10 +74,10 @@ def response():
 	response_to_add = Response(*values)
 	db.session.add(response_to_add)
 	db.session.commit()
-	with shelve.open('shelf') as shelf:
-		data = shelf['data']
-		data.append(values)
-		shelf['data'] = data
+	# with shelve.open('shelf') as shelf:
+	# 	data = shelf['data']
+	# 	data.append(values)
+	# 	shelf['data'] = data
 	with open('text_data.txt', 'a') as file:
 		to_add = values
 		to_add = ','.join([str(el) for el in to_add]) + '\n'
