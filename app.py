@@ -57,9 +57,7 @@ class Response(db.Model):
 		return 'This is response {}'.format(self.id)
 
 
-# Setting up shelve
-with shelve.open('shelf') as shelf:
-	shelf['data'] = []
+
 
 # Routes
 @app.route('/')
@@ -80,6 +78,10 @@ def response():
 		data = shelf['data']
 		data.append(values)
 		shelf['data'] = data
+	with open('text_data.txt', 'a') as file:
+		to_add = values
+		to_add = ','.join([str(el) for el in to_add]) + '\n'
+		file.write(to_add)
 	return render_template('thankyou.html', pd=pd, args=args)
 
 
