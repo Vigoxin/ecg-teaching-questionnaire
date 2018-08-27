@@ -11,12 +11,18 @@
 
 			<form action='response'>
 				
-				<p>Please change the sliders to show how important each of the following is to you. The sliders are arranged such that they all add up to 100 at any time, so it's not possible to rank multiple things highly or lowly. It's a bit like you have 100 points to allocate amongst all the choices, so you're forced to prioritise. Feel free to rank 1 or 2 things very highly and the rest 0, or spread it out as much as you want. If there's any problem, just type some free text in the comments box, or just email me directly at vignesh.dhileepan@nhs.net</p>
+				<p> <strong>Question:</strong> Please change the sliders to show how important each of the following is to you. It's a bit like you have 100 points to allocate amongst all the choices, so you're forced to prioritise. They're set so that the total number always adds up to 100.</p> 
+
+				<ul>
+					<li class='to-indent'>Feel free to rank 1 or 2 things very highly and the rest 0, or spread out the points equally, or however you want.</li>
+					<li class='to-indent'>If sliders you already set keep changing as you set other sliders: decide your number allocations beforehand, then start from the top and work your way down. </li>
+					<li class='to-indent'>If there's any problem, just type some free text in the comments box, or just email me directly at vignesh.dhileepan@nhs.net</li>
+				</ul>
 				
 				{%for i in range(1, lenq+1)%}
 					<hr>
 					<div class='section'>
-						<label for="{{i}}"> <span>&#8226;</span> {{questions[i-1]['subject']}}: {{questions[i-1]['description'] | safe}}</label>
+						<label for="{{i}}"> <strong>{{questions[i-1]['subject']}}</strong>: {{questions[i-1]['description'] | safe}}</label>
 						<input class='number' type="number" name="{{questions[i-1]['subject']}}" value="{{100//(lenq-1)}}">
 						<input class='range-{{i}} range' type="range" min="0" max="100" step="1" value="{{100//(lenq-1)}}" />
 					</div>

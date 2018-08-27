@@ -1,9 +1,9 @@
 $('.range')[$('.range').length-1].value = 0
 $('.number')[$('.number').length-1].value = 0
 
-otherInput = document.createElement('input');
-otherInput.type = 'text';
-otherInput.placeholder = 'Anything else I\'ve missed?';
+otherInput = document.createElement('textarea');
+otherInput.placeholder = "Leave this blank and set this slider to 0, unless you can think of some other aspect you'd like to cover";
+otherInput.resize = 'both';
 otherInput.id = 'otherInput';
 otherInput.name = 'other_text';
 $('.section')[$('.section').length-1].append(otherInput);
