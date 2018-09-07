@@ -17,6 +17,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Data
+constants = {
+	'day_of_teaching': 'Tuesday',
+	'date_of_teaching': 'September 11th'
+}
+
 from confucius_quotes import quotes
 pd = {
 	'quotes': quotes
@@ -68,7 +73,7 @@ db.create_all()
 # Routes
 @app.route('/')
 def index():
-	return render_template('index.html', questions=questions, lenq=len(questions), pd=pd)
+	return render_template('index.html', questions=questions, lenq=len(questions), pd=pd, constants=constants)
 
 @app.route('/response', methods=['GET', 'POST'])
 def response():
@@ -79,7 +84,7 @@ def response():
 	response_to_add = Response(*values)
 	db.session.add(response_to_add)
 	db.session.commit()
-	return render_template('thankyou.html', pd=pd, args=args)
+	return render_template('thankyou.html', pd=pd, args=args, constants=constants)
 
 
 # Main
