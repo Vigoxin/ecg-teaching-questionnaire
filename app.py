@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 # set up basedir
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# set up flask app
+# set up flask appp
 app = Flask(__name__)
 
 # configure sqlalchemy
