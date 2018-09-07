@@ -9,6 +9,8 @@ otherInput.name = 'other_text';
 $('.section')[$('.section').length-1].append(otherInput);
 
 
+$($('input[type="radio"]').toArray().filter(function(x){return $(x).attr('value') === '1'})).attr('checked', 'true');
+
 var randomQuote = pd['quotes'][Math.floor(Math.random()*pd['quotes'].length)];
 $('#comments').attr('placeholder', 'Confucius say: \n' + randomQuote);
 
