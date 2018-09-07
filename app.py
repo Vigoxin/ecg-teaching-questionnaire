@@ -28,7 +28,7 @@ questions = [
 	{'subject': 'Management', 'description': '<em>Management</em> of different arrhythmias and ECG pathologies'},
 	{'subject': 'Understanding', 'description': 'Getting a deeper understanding of what is happening in the heart during different arrhythmias'},
 	{'subject': 'First principles', 'description': 'Understanding the basis of the ECG, why each wave/deflection looks the way it does, i.e. the basics of ECG from first principles'},
-	{'subject': 'Other', 'description': ''}
+	{'subject': 'Other', 'description': ''},
 ]
 
 # Models
@@ -41,9 +41,12 @@ class Response(db.Model):
 	first_principles = db.Column(db.Integer)
 	other = db.Column(db.Integer)
 	other_text = db.Column(db.Text)
+	confident_overall = db.Column(db.Integer)
+	confident_rhythms = db.Column(db.Integer)
+	confident_ischaemia = db.Column(db.Integer)
 	comments = db.Column(db.Text)
 
-	def __init__(self, presentation, practice, management, understanding, first_principles, other, other_text, comments):
+	def __init__(self, presentation, practice, management, understanding, first_principles, other, other_text, confident_overall, confident_rhythms, confident_ischaemia, comments):
 		self.presentation = presentation
 		self.practice = practice
 		self.management = management
@@ -51,6 +54,9 @@ class Response(db.Model):
 		self.first_principles = first_principles
 		self.other = other
 		self.other_text = other_text
+		self.confident_overall = confident_overall
+		self.confident_rhythms = confident_rhythms
+		self.confident_ischaemia = confident_ischaemia
 		self.comments = comments
 
 	def __repr__(self):
@@ -73,17 +79,9 @@ def response():
 	response_to_add = Response(*values)
 	db.session.add(response_to_add)
 	db.session.commit()
-	# with shelve.open('shelf') as shelf:
-	# 	data = shelf['data']
-	# 	data.append(values)
-	# 	shelf['data'] = data
-	# with open('text_data.txt', 'a') as file:
-	# 	to_add = values
-	# 	to_add = ','.join([str(el) for el in to_add]) + '\n'
-	# 	file.write(to_add)
 	return render_template('thankyou.html', pd=pd, args=args)
 
 
 # Main
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=True, port=5001)

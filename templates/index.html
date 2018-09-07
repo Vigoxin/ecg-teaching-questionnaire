@@ -11,7 +11,9 @@
 
 			<form action='response'>
 				
-				<p> <strong>Question:</strong> Please change the sliders to show how important each of the following is to you. It's a bit like you have 100 points to allocate amongst all the choices, so you're forced to prioritise. They're set so that the total number always adds up to 100.</p> 
+				<h4 class='question-heading'><strong>Question 1</strong></h4>
+
+				<p>Please change the sliders to show how important each of the following is to you. It's a bit like you have 100 points to allocate amongst all the choices, so you're forced to prioritise. They're set so that the total number always adds up to 100.</p> 
 
 				<ul>
 					<li class='to-indent'>Feel free to rank 1 or 2 things very highly and the rest 0, or spread out the points equally, or however you want.</li>
@@ -28,6 +30,57 @@
 					</div>
 				{%endfor%}
 				<hr>
+
+				<h4 class='question-heading'><strong>Question 2</strong></h4>
+				<p> How confident are you at reading ECGs (overall)?</p>
+				
+				<div class="scale-question">
+					{% for i in range(1, 11) %}
+						<div class="scale-button-holder">
+							<input type="radio" name="confident-overall" value="{{i}}">
+							<br>
+							<label>{{i}} </label>
+							<br>
+						</div>
+					{% endfor %}
+				</div>
+				<div class='scale-interpretation'>
+					<p>(I have no clue)</p> <p></p> <p>(I can interpret almost every ecg correctly) </p>
+				</div>
+
+				<h4 class='question-heading'><strong>Question 3</strong></h4>
+				<p> How confident are you specifically at identifying ECG rhythms?</p>
+				
+				<div class="scale-question">
+					{% for i in range(1, 11) %}
+						<div class="scale-button-holder">
+							<input type="radio" name="confident-rhythms" value="{{i}}">
+							<br>
+							<label>{{i}} </label>
+							<br>
+						</div>
+					{% endfor %}
+				</div>
+				<div class='scale-interpretation'>
+					<p>(I have no clue)</p> <p></p> <p>(I can identify the rhythm correctly on almost every ecg) </p>
+				</div>
+				
+				<h4 class='question-heading'><strong>Question 4</strong></h4>
+				<p> How confident are you specifically at identifying features of ischaemia (e.g. ST elevation?)</p>
+
+				<div class="scale-question">
+					{% for i in range(1, 11) %}
+						<div class="scale-button-holder">
+							<input type="radio" name="confident-ischaemia" value="{{i}}">
+							<br>
+							<label>{{i}} </label>
+							<br>
+						</div>
+					{% endfor %}
+				</div>
+				<div class='scale-interpretation'>
+					<p>(I have no clue)</p> <p></p> <p>(I can identify the presence or absence of ischaemia correctly on almost every ecg) </p>
+				</div>
 
 				<br>
 				<p>Any other comments?</p>

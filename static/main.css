@@ -67,6 +67,27 @@ p {
 	display: inline;
 }
 
+.scale-question {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.scale-button-holder>* {
+    margin: 0 auto;
+    display: inline-block;
+    text-align: center;   
+}
+
+.scale-interpretation {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+.question-heading {
+    text-align: center;
+    padding-top: 20px;
+}
+
 textarea {
     resize: both;
     width: 100%;
