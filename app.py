@@ -1,8 +1,9 @@
 # Imports
 import os
 # import shelve
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+import sqlite3
 
 # set up basedir
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -86,6 +87,20 @@ def response():
 	db.session.commit()
 	return render_template('thankyou.html', pd=pd, args=args, constants=constants)
 
+@app.route('/show_data')
+def show_data():
+	result = Response.query.all()
+	data = []
+	for row in result:
+		item = {}
+		row = row.__dict__
+		for key in row:
+			if key != '_sa_instance_state':
+				print(key)
+				print(row[key])
+				item[key] = row[key]
+		data.append(item)
+	return jsonify(data)
 
 # Main
 if __name__ == '__main__':
