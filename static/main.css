@@ -5,13 +5,13 @@
 }
 
 body {
-	font-family: Arial;
+	/*font-family: "Apple Color Emoji";*/
     /*font-size: 20px;*/
 }
 
 body {
     padding: 20px;
-    background-color: #ffa5a5;
+    background-color: crimson;
 }
 
 .wrapper {
@@ -23,7 +23,8 @@ body {
 
     width: 800px;
 
-    background: linear-gradient(rgba(255, 78, 78, 0.18), rgba(255, 78, 78, 0.18)), linear-gradient(#fff, #fff);
+    /*background: linear-gradient(rgba(255, 78, 78, 0.18), rgba(255, 78, 78, 0.18)), #fff;*/
+    background: lavenderblush;
 }
 
 h1 {

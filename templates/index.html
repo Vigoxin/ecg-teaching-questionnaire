@@ -1,92 +1,101 @@
 {% extends 'base.html' %}
 
 {% block content %}
-			<div class="intro">
-				<p>Hi everyone! Vignesh here, F1 with an interest in cardiology :) I'll be doing a teaching session for you guys this {{constants['day_of_teaching']}} ({{constants['date_of_teaching']}}) on ECGs and arrhythmias as part of the teaching course that Thurkka Rajeswaran (another FY1) is organising.</p> 
-				
-				<p>As this can be a topic in which people have varying experience levels and expectations of what will be taught, it would be super duper helpful if you could please fill in this form, so that I can tailor the session as close as possible to exactly what you all want! :)</p>
-			</div>
 
-			<br>
+<div class="intro">
+	<p>Hi everyone! Vignesh here, F1 with an interest in cardiology. I'll be doing a teaching session for you guys this {{constants['day_of_teaching']}} ({{constants['date_of_teaching']}}) on ECGs and arrhythmias as part of the teaching course that {{constants['organiser']}} (another FY1) is organising.</p> 
+	
+	<p>As this is be a topic in which people can have hugely variable levels of experience and expectations of what will be taught, it would be super duper helpful if you could please fill in this form, so that I can tailor the session as close as possible to exactly what you all want! :)</p>
+</div>
 
-			<form action='response'>
-				
-				<h4 class='question-heading'><strong>Question 1</strong></h4>
+<br>
 
-				<p>Please change the sliders to show how important each of the following is to cover in the teaching session. It's a bit like you have 100 points to allocate amongst all the choices, so you'll be forced to prioritise. They're set so that the total number always adds up to 100.</p> 
+<form action='/response' method='GET'>
+	
+	<h4 class='question-heading'><strong>Question 1</strong></h4>
 
-				<ul>
-					<li class='to-indent'>Feel free to rank 1 or 2 things very highly and the rest 0, or spread out the points fairly equally, or basically however you want.</li>
-					<li class='to-indent'>If the sliders you already set keep changing as you set other sliders: decide your number allocations beforehand, then start from the top and work your way down. </li>
-					<li class='to-indent'>If there's any problem at all, just type some free text in the comments box, or just email me directly at vignesh.dhileepan@gmail.com</li>
-				</ul>
-				
-				{%for i in range(1, lenq+1)%}
-					<hr>
-					<div class='section'>
-						<label for="{{i}}"> <strong>{{questions[i-1]['subject']}}</strong>: {{questions[i-1]['description'] | safe}}</label>
-						<input class='number' type="number" name="{{questions[i-1]['subject']}}" value="{{100//(lenq-1)}}">
-						<input class='range-{{i}} range' type="range" min="0" max="100" step="1" value="{{100//(lenq-1)}}" />
-					</div>
-				{%endfor%}
-				<hr>
+	<p>Please change the sliders to show how important each of the following is to cover in the teaching session. It's a bit like you have 100 points to allocate amongst all the choices, so you'll be forced to prioritise. They're set so that the total number always adds up to 100.</p> 
 
-				<h4 class='question-heading'><strong>Question 2</strong></h4>
-				<p> How confident are you at reading ECGs (overall)?</p>
-				
-				<div class="scale-question">
-					{% for i in range(1, 11) %}
-						<div class="scale-button-holder">
-							<input type="radio" name="confident-overall" value="{{i}}">
-							<br>
-							<label>{{i}} </label>
-							<br>
-						</div>
-					{% endfor %}
-				</div>
-				<div class='scale-interpretation'>
-					<p>(I have no clue)</p> <p></p> <p>(I can interpret almost every ecg correctly) </p>
-				</div>
+	<ul>
+		<li class='to-indent'>Feel free to rank 1 or 2 things very highly and the rest 0, or spread out the points fairly equally, or anything in between.</li>
+		<li class='to-indent'>If the sliders you already set keep changing as you set other sliders: decide your number allocations beforehand, then start from the top and work your way down. </li>
+		<li class='to-indent'>If there's any problem at all, just type your ratings as free text in the comments box, or just email me directly at vignesh.dhileepan@gmail.com</li>
+	</ul>
 
-				<h4 class='question-heading'><strong>Question 3</strong></h4>
-				<p> How confident are you specifically at identifying ECG rhythms?</p>
-				
-				<div class="scale-question">
-					{% for i in range(1, 11) %}
-						<div class="scale-button-holder">
-							<input type="radio" name="confident-rhythms" value="{{i}}">
-							<br>
-							<label>{{i}} </label>
-							<br>
-						</div>
-					{% endfor %}
-				</div>
-				<div class='scale-interpretation'>
-					<p>(I have no clue)</p> <p></p> <p>(I can identify the rhythm correctly on almost every ecg) </p>
-				</div>
-				
-				<h4 class='question-heading'><strong>Question 4</strong></h4>
-				<p> How confident are you specifically at identifying features of ischaemia (e.g. ST elevation?)</p>
+	{%for i in range(1, lenq+1)%}
+		<hr>
+		<div class='section'>
+			<label for="{{i}}"> <strong>{{questions[i-1]['subject']}}</strong>: {{questions[i-1]['description'] | safe}}</label>
+			<input class='number' type="number" name="{{questions[i-1]['subject']}}" value="{{100//(lenq-1)}}">
+			<input class='range-{{i}} range' type="range" min="0" max="100" step="1" value="{{100//(lenq-1)}}" />
+		</div>
+	{%endfor%}
 
-				<div class="scale-question">
-					{% for i in range(1, 11) %}
-						<div class="scale-button-holder">
-							<input type="radio" name="confident-ischaemia" value="{{i}}">
-							<br>
-							<label>{{i}} </label>
-							<br>
-						</div>
-					{% endfor %}
-				</div>
-				<div class='scale-interpretation'>
-					<p>(I have no clue)</p> <p></p> <p>(I can identify the presence or absence of ischaemia correctly on almost every ecg) </p>
-				</div>
+	<hr>
 
+	<h4 class='question-heading'><strong>Question 2</strong></h4>
+	<p> How confident are you at reading ECGs (overall)?</p>
+	
+	<div class="scale-question">
+		{% for i in range(1, 11) %}
+			<div class="scale-button-holder">
+				<input type="radio" name="confident-overall" value="{{i}}">
 				<br>
-				<p>Any other comments?</p>
-				<textarea id='comments' name='comments' placeholder="" rows='4' cols='60'></textarea> <br>
+				<label>{{i}} </label>
+				<br>
+			</div>
+		{% endfor %}
+	</div>
+	<div class='scale-interpretation'>
+		<p>(I have no clue)</p> <p></p> <p>(I can interpret almost every ecg correctly) </p>
+	</div>
+	
+	<hr>
 
-				<input type="submit" class='btn btn-success' value="Submit">
-			</form>
+	<h4 class='question-heading'><strong>Question 3</strong></h4>
+	<p> How confident are you specifically at identifying ECG rhythms?</p>
+	
+	<div class="scale-question">
+		{% for i in range(1, 11) %}
+			<div class="scale-button-holder">
+				<input type="radio" name="confident-rhythms" value="{{i}}">
+				<br>
+				<label>{{i}} </label>
+				<br>
+			</div>
+		{% endfor %}
+	</div>
+	<div class='scale-interpretation'>
+		<p>(I have no clue)</p> <p></p> <p>(I can identify the rhythm correctly on almost every ecg) </p>
+	</div>
+	
+	<hr>
+
+	<h4 class='question-heading'><strong>Question 4</strong></h4>
+	<p> How confident are you specifically at identifying features of ischaemia (e.g. ST elevation?)</p>
+
+	<div class="scale-question">
+		{% for i in range(1, 11) %}
+			<div class="scale-button-holder">
+				<input type="radio" name="confident-ischaemia" value="{{i}}">
+				<br>
+				<label>{{i}} </label>
+				<br>
+			</div>
+		{% endfor %}
+	</div>
+	<div class='scale-interpretation'>
+		<p>(I have no clue)</p> <p></p> <p>(I can identify the presence or absence of ischaemia correctly on almost every ecg) </p>
+	</div>
+
+
+
+	<hr>
+
+	<p>Any other comments?</p>
+	<textarea id='comments' name='comments' placeholder="" rows='4' cols='60'></textarea> <br>
+
+	<input type="submit" class='btn btn-success' value="Submit">
+</form>
 
 {% endblock %}

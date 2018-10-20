@@ -1,6 +1,5 @@
 # Imports
 import os
-# import shelve
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
@@ -19,8 +18,9 @@ db = SQLAlchemy(app)
 
 # Data
 constants = {
-	'day_of_teaching': 'Tuesday',
-	'date_of_teaching': 'September 11th'
+	'day_of_teaching': 'Wednesday',
+	'date_of_teaching': 'October 24th',
+	'organiser': 'Patrick Murphy'
 }
 
 from confucius_quotes import quotes
@@ -30,7 +30,7 @@ pd = {
 
 questions = [
 	{'subject': 'Presentation', 'description': 'Being able to present ECGs in a slick manner (both for exams, and for when a consultant/senior puts you on the spot)'},
-	{'subject': 'Practice', 'description': 'Getting lots of practice at interpreting/presenting ECGs, getting better at pattern recognition'},
+	{'subject': 'Practice', 'description': 'Getting lots of practice at interpreting and presenting ECGs, getting better at pattern recognition'},
 	{'subject': 'Management', 'description': '<em>Management</em> of different arrhythmias and ECG pathologies'},
 	{'subject': 'Understanding', 'description': 'Getting a deeper understanding of what is happening in the heart during different arrhythmias'},
 	{'subject': 'First principles', 'description': 'Understanding the basis of the ECG, why each wave/deflection looks the way it does, i.e. the basics of ECG from first principles'},
@@ -78,6 +78,8 @@ def index():
 
 @app.route('/response', methods=['GET', 'POST'])
 def response():
+	print('request.args: ', request.args)
+	print('request.form: ', request.form)
 	args = dict(request.args)
 	for key in args:
 		args[key] = args[key][0]
@@ -90,16 +92,9 @@ def response():
 @app.route('/show_data')
 def show_data():
 	result = Response.query.all()
-	data = []
-	for row in result:
-		item = {}
-		row = row.__dict__
-		for key in row:
-			if key != '_sa_instance_state':
-				print(key)
-				print(row[key])
-				item[key] = row[key]
-		data.append(item)
+	data = [row.__dict__ for row in result]
+	for d in data:
+		d.pop('_sa_instance_state')
 	return jsonify(data)
 
 # Main
