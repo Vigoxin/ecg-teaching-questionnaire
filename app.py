@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
+from datetime import datetime
 
 # set up basedir
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -18,9 +19,9 @@ db = SQLAlchemy(app)
 
 # Data
 constants = {
-	'day_of_teaching': 'Wednesday',
-	'date_of_teaching': 'October 24th',
-	'organiser': 'Patrick Murphy'
+	'day_of_teaching': 'Thursday',
+	'date_of_teaching': 'November 8th',
+	'organiser': 'Thurkka'
 }
 
 from confucius_quotes import quotes
@@ -40,6 +41,7 @@ questions = [
 # Models
 class Response(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
+	time = db.Column(db.Text)
 	presentation = db.Column(db.Integer)
 	practice = db.Column(db.Integer)
 	management = db.Column(db.Integer)
@@ -53,6 +55,7 @@ class Response(db.Model):
 	comments = db.Column(db.Text)
 
 	def __init__(self, presentation, practice, management, understanding, first_principles, other, other_text, confident_overall, confident_rhythms, confident_ischaemia, comments):
+		self.time = datetime.now().strftime('%d/%m/%y %H:%M:%S')
 		self.presentation = presentation
 		self.practice = practice
 		self.management = management

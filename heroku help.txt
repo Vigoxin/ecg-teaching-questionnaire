@@ -1,0 +1,11 @@
+To gain access to postgres server:
+heroku pg:psql postgresql-cylindrical-60254 --app ecg-teaching-questionnaire
+(or go to the heroku app > resources > view database credentials, then copy the command under 'Heroku CLI')
+
+To export table 'response':
+\COPY response TO 'exports/current_export.csv' WITH (FORMAT csv, DELIMITER ',',  HEADER true)
+
+To reset database, first run:
+heroku pg:reset
+then:
+heroku restart
